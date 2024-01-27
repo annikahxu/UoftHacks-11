@@ -1,6 +1,5 @@
-   import 'package:flutter/material.dart';
-   import 'pages/second_page.dart';
-  import 'pages/swipe.dart';
+import 'package:flutter/material.dart';
+import 'pages/left_swipe.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,51 +11,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot relorad.
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 174, 214, 255)),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'UofTHacks'),
+    return const MaterialApp(
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const MyHomePage ({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final PageController _pageController = PageController(initialPage: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -67,21 +36,65 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: PageView(
-        scrollDirection: Axis.horizontal,
-        children: [
-          Swipe(),
-          SecondPage(),
-          // Add an empty page to serve as a placeholder
-          Container(),
-        ],
+      body: Center(
+        child: PageView.builder(
+          controller: _pageController,
+            scrollDirection: Axis.horizontal,
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              if (index == 0) {
+                return const Swipe();
+              } else if (index == 1) {
+                return const LandingPage();
+              } else if (index == 2) {
+                return const LeftSwipe();
+              }
+            },
+              ),
       ),
        // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class LandingPage extends StatelessWidget {
+  const LandingPage({Key? key}) : super(key : key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: const Center(
+        child: Text('Home Page'),
+      ),
+    );
+  }
+}
+
+class Swipe extends StatelessWidget {
+  const Swipe({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      child: const Center(
+        child: Text('Swipe Page'),
+      ),
+    );
+  }
+}
+
+class LeftSwipe extends StatelessWidget {
+  const LeftSwipe({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.green,
+      child: const Center(
+        child: Text('Left Swipe Page'),
+      ),
     );
   }
 }
