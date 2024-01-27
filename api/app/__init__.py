@@ -12,8 +12,8 @@ MONGODB_URI = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@cluster0.9r8
 
 client = MongoClient(MONGODB_URI)
 db = client["uofthacks"]
-users = db["users"]
-notes = db["notes"]
+user = db["user"]
+note = db["note"]
 
 
 def create_app():
@@ -26,8 +26,10 @@ def create_app():
 
     CORS(app, resources={r"/*": {"origins": "*"}})
 
-    from .views import views
+    from .users import users
+    from .notes import notes
 
-    app.register_blueprint(views, url_prefix="/")
+    app.register_blueprint(users, url_prefix="/users")
+    app.register_blueprint(notes, url_prefix="/notes")
 
     return app
