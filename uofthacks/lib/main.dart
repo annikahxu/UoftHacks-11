@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'pages/left_swipe.dart';
 
 void main() {
   runApp(const MyApp());
@@ -58,14 +57,20 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class LandingPage extends StatelessWidget {
-  const LandingPage({Key? key}) : super(key : key);
+  const LandingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: const Center(
-        child: Text('Home Page'),
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(32),
+        decoration: const BoxDecoration(
+          image:DecorationImage(
+            image: AssetImage('assets/landingpage.jpeg'),
+            fit: BoxFit.cover
+          ),
+        ),
       ),
     );
   }
