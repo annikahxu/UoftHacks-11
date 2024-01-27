@@ -14,8 +14,6 @@ def create_note():
         location=data['location'],
         title=data['title'],
         body=data['body'],
-        icon=data['icon'],
-        user=data['user']
     ).save()
     return jsonify(note.to_dict())
 

@@ -16,8 +16,8 @@ class Note(Document):
     location = ListField(FloatField(), required=True)  # [latitude, longitude]
     title = StringField(required=True)
     body = StringField(required=True)
-    icon = ImageField(required=True)        # Image of icon
-    user = ReferenceField(User, reverse_delete_rule=CASCADE)
+    # icon = ImageField(required=True)        # Image of icon
+    # user = ReferenceField(User, reverse_delete_rule=CASCADE)
 
     def to_dict(self):
         return {
@@ -26,8 +26,6 @@ class Note(Document):
             "location": self.location,
             "title": self.title,
             "body": self.body,
-            "owner": self.owner,
-            "icon": self.icon
         }
 
     def is_near(self, coordinates):
