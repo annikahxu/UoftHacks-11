@@ -23,7 +23,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
   final PageController _pageController = PageController(initialPage: 1);
 
   @override
@@ -36,20 +36,60 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       body: Center(
-        child: PageView.builder(
+        child: GestureDetector(
+          
+          child: PageView.builder(
           controller: _pageController,
-            scrollDirection: Axis.horizontal,
-            itemCount: 3,
-            itemBuilder: (context, index) {
+          scrollDirection: Axis.horizontal,
+          itemCount: 3,
+          pageSnapping: true, // Enable snapping effect
+          itemBuilder: (context, index) {
               if (index == 0) {
-                return const Swipe();
+                return GestureDetector(
+                onHorizontalDragUpdate: (details) {
+                  int xPosition = details.globalPosition.dx.toInt();
+                  double screenWidth = MediaQuery.of(context).size.width;
+                  double rightEdgeThreshold = screenWidth - 100.0;
+
+                  if (xPosition > rightEdgeThreshold) {
+                    _pageController.jumpToPage(index + 1);
+                  }
+                },
+                child: const Swipe(),
+              );
+
               } else if (index == 1) {
-                return const LandingPage();
+                  return GestureDetector(
+                    onHorizontalDragUpdate: (details) {
+                      int xPosition = details.globalPosition.dx.toInt();
+                      double screenWidth = MediaQuery.of(context).size.width;
+                      double leftEdgeThreshold = 100.0;
+                      double rightEdgeThreshold = screenWidth - 100.0;
+
+                      if (xPosition < leftEdgeThreshold) {
+                        _pageController.jumpToPage(index - 1);
+                      } else if (xPosition > rightEdgeThreshold) {
+                        _pageController.jumpToPage(index+1);
+                      }
+                    },
+                    child: const LandingPage(),
+                  );
               } else if (index == 2) {
-                return const LeftSwipe();
+                  return GestureDetector(
+                    onHorizontalDragUpdate: (details) {
+                      int xPosition = details.globalPosition.dx.toInt();
+                      double leftEdgeThreshold = 100.0;
+
+                      if (xPosition < leftEdgeThreshold) {
+                        _pageController.jumpToPage(index - 1);
+                      }
+                    },
+                    child: const LeftSwipe(),
+              );
               }
             },
-              ),
+            ),
+        )
       ),
        // This trailing comma makes auto-formatting nicer for build methods.
     );
