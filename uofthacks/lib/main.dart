@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uofthacks/pages/map_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -84,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                         _pageController.jumpToPage(index - 1);
                       }
                     },
-                    child: const LeftSwipe(),
+                    child: MapPage(),
               );
               }
             },
