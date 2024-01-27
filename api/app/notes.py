@@ -14,7 +14,8 @@ def create_note():
         location=data['location'],
         title=data['title'],
         body=data['body'],
-        icon=data['icon']
+        icon=data['icon'],
+        user=data['user']
     ).save()
     return jsonify(note.to_dict())
 
@@ -37,9 +38,10 @@ def delete_note(note_id):
 
 @notes.route('/nearby', methods=['GET'])
 def get_nearby_notes():
-    location = request.json()['location']
+    # first number is latitude, second is longitude
+    coordinates = request.json()['coordinates']
     nearby_notes = []
     for note in Note.objects():
-        if note.is_near(location):
+        if note.is_near(coordinates):
             nearby_notes.append(note)
-    return nearby_notes
+    return jsonify(nearby_notes)
