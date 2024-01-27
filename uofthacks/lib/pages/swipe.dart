@@ -10,7 +10,7 @@ class Swipe extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Second Page'),
+        title: const Text('Swipe'),
       ),
       body: const Center(
         child: Text('This is the Second Page'),

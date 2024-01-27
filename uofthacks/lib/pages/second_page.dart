@@ -1,6 +1,5 @@
-// lib/pages/second_page.dart
-
 import 'package:flutter/material.dart';
+
 
 class SecondPage extends StatelessWidget {
   // Add a named 'key' parameter to the constructor
@@ -12,8 +11,26 @@ class SecondPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Second Page'),
       ),
-      body: const Center(
-        child: Text('This is the Second Page'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SecondPage()),
+                );
+              }, 
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue, //button colour
+                foregroundColor: Colors.white, //text colour 
+              ),
+              child: const Text('Elevated Button')
+              ),
+            
+          ],
+        ),
       ),
     );
   }
