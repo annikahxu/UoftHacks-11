@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/left_swipe.dart';
+import 'package:uofthacks/pages/map_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,20 +37,25 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       body: Center(
-        child: PageView.builder(
-          controller: _pageController,
-            scrollDirection: Axis.horizontal,
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                return const Swipe();
-              } else if (index == 1) {
-                return const LandingPage();
-              } else if (index == 2) {
-                return const LeftSwipe();
-              }
-            },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MapPage()),
+                );
+              }, 
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue, //button colour
+                foregroundColor: Colors.white, //text colour 
               ),
+              child: const Text('Elevated Button')
+              ),
+            
+          ],
+        ),
       ),
        // This trailing comma makes auto-formatting nicer for build methods.
     );
