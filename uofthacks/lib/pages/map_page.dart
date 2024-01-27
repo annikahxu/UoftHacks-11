@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapPage extends StatefulWidget {
-  const MapPage({super.key});
-
   @override
-  State<MapPage> createState() => _MapPageState();
+  _MapPageState createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> {
@@ -20,7 +18,7 @@ class _MapPageState extends State<MapPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Map Page'),
+        title: Text('Map Page'),
       ),
       body: GoogleMap(
         onMapCreated: _onMapCreated,
