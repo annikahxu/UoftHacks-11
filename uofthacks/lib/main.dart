@@ -85,9 +85,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                         _pageController.jumpToPage(index - 1);
                       }
                     },
-                    child: MapPage(),
+                    child: const MapPage(),
               );
               }
+              return null;
             },
             ),
         )

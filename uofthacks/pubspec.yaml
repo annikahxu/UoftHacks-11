@@ -39,6 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.5.3
   http: ^1.2.0
+  arkit_plugin: ^1.0.7
 
 dev_dependencies:
   flutter_test:

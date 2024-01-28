@@ -1,5 +1,9 @@
 PODS:
+  - arkit_plugin (0.0.1):
+    - Flutter
+    - GLTFSceneKit
   - Flutter (1.0.0)
+  - GLTFSceneKit (0.3.0)
   - google_maps_flutter_ios (0.0.1):
     - Flutter
     - GoogleMaps (< 9.0)
@@ -10,21 +14,27 @@ PODS:
     - GoogleMaps/Base
 
 DEPENDENCIES:
+  - arkit_plugin (from `.symlinks/plugins/arkit_plugin/ios`)
   - Flutter (from `Flutter`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
 
 SPEC REPOS:
   trunk:
+    - GLTFSceneKit
     - GoogleMaps
 
 EXTERNAL SOURCES:
+  arkit_plugin:
+    :path: ".symlinks/plugins/arkit_plugin/ios"
   Flutter:
     :path: Flutter
   google_maps_flutter_ios:
     :path: ".symlinks/plugins/google_maps_flutter_ios/ios"
 
 SPEC CHECKSUMS:
+  arkit_plugin: bb56e71ef215147316ecf3774d5cb74beda20a10
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  GLTFSceneKit: d1b437c514ba2aed5555afb0fddd64e030612d57
   google_maps_flutter_ios: f135b968a67c05679e0a53538e900b5c174b0d99
   GoogleMaps: 20d7b12be49a14287f797e88e0e31bc4156aaeb4
 
