@@ -8,10 +8,10 @@ import os
 MONGODB_USERNAME = "pat"
 MONGODB_PASSWORD = "uofthacks"
 
-MONGODB_URI = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@cluster0.9r8z6lf.mongodb.net/"
+MONGODB_URI = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@cluster0.9r8z6lf.mongodb.net/uofthacks11?retryWrites=true&w=majority&ssl=true"
 
 client = MongoClient(MONGODB_URI)
-db = client["uofthacks"]
+db = client["uofthacks11"]
 user = db["user"]
 note = db["note"]
 
@@ -23,6 +23,8 @@ def create_app():
     app.config['MONGO_URI'] = MONGODB_URI
     mongo = PyMongo()
     mongo.init_app(app)
+
+    connect('uofthacks11', host=MONGODB_URI)
 
     CORS(app, resources={r"/*": {"origins": "*"}})
 

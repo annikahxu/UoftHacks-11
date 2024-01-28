@@ -2,6 +2,8 @@ from mongoengine import *
 from flask import jsonify, request
 import math
 
+from . import user, note
+
 
 class User(Document):
     _id = ObjectIdField(required=True)
@@ -11,25 +13,28 @@ class User(Document):
 
 
 class Note(Document):
-    _id = ObjectIdField(required=True)
+    # _id = ObjectIdField(required=True)
     creation_time = IntField(required=True)  # Unix timestamp
-    location = ListField(FloatField(), required=True)  # [latitude, longitude]
+    # [latitude, longitude]
+    coordinates = ListField(FloatField(), required=True)
     title = StringField(required=True)
     body = StringField(required=True)
     # icon = ImageField(required=True)        # Image of icon
     # user = ReferenceField(User, reverse_delete_rule=CASCADE)
 
+    def insert(self):
+        note.insert_one(self.to_dict())
+
     def to_dict(self):
         return {
-            "_id": self._id,
             "creation_time": self.creation_time,
-            "location": self.location,
+            "coordinates": self.coordinates,
             "title": self.title,
             "body": self.body,
         }
 
     def is_near(self, coordinates):
-        return Note.haversine(self.location, coordinates) <= 1000
+        return Note.haversine(self.coordinates, coordinates) <= 1000
 
     @staticmethod
     def haversine(coord1, coord2):
