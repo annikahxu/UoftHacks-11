@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from bson.objectid import ObjectId
+import time
 
 from .models import User, Note
 from . import note
@@ -12,7 +13,7 @@ def create_note():
     data = request.json
 
     note = Note(
-        creation_time=data['creation_time'],
+        creation_time=int(time.time()),
         coordinates=data['coordinates'],
         title=data['title'],
         body=data['body'],

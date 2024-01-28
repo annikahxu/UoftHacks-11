@@ -1,6 +1,7 @@
 from mongoengine import *
 from flask import jsonify, request
 import math
+import datetime
 
 from . import user, note
 
@@ -57,3 +58,7 @@ class Note(Document):
 
         distance = R * c  # output distance in meters
         return distance
+
+    @staticmethod
+    def unix_to_date(unix):
+        return datetime.datetime.fromtimestamp(unix).strftime('%m/%d/%Y')
