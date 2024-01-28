@@ -46,35 +46,27 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
             fit: BoxFit.cover
           ),
         ),
-
-        child: Column(
+        
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MapPage()),
-                );
-              }, 
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue, //button colour
-                foregroundColor: Colors.white, //text colour 
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Swipe()),
+                  );
+                }
               ),
-              child: const Text('Map')
-              ),
-
-              ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Swipe()),
-                );
-              }, 
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue, //button colour
-                foregroundColor: Colors.white, //text colour 
-              ),
-              child: const Text('Add Note')
+              IconButton(
+                icon: const Icon(Icons.arrow_forward),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MapPage()),
+                  );
+                }
               ),
           ],
         )
