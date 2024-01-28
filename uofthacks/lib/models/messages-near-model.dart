@@ -31,3 +31,8 @@ class MessagesNearModel {
     }
   }
 }
+
+void main() {
+  var model = MessagesNearModel(title: 'Example', location: [0.0, 0.0]);
+  model.fetchData([1.0, 2.0]);
+}
