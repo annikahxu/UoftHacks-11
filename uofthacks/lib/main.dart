@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:uofthacks/pages/map_page.dart';
 import 'package:uofthacks/pages/ar_page.dart';
-import 'package:uofthacks/pages/swipe.dart';
+import 'package:uofthacks/services/location-service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +27,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
+  final LocationService locationService = LocationService(); // Create LocationService instance
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +56,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ARView()),
+                    MaterialPageRoute(builder: (context) => ARView(locationStream: locationService.locationStream)),
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0, left: 20.0),
+                  padding: const EdgeInsets.only(top: 55.0, left: 20.0),
                   child: Image.asset(
                   'assets/leftarrow.jpeg', // Replace with the path to your image asset
                   width: 100, // Adjust the width as needed
@@ -71,11 +72,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MapPage()),
+                    MaterialPageRoute(builder: (context) => const MapPage()),
                   );
                 },
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 675.0, right: 40.0),
+                  padding: const EdgeInsets.only(top: 775.0, right: 40.0),
                   child: Image.asset(
                   'assets/rightarrow.jpeg', // Replace with the path to your image asset
                   width: 150, // Adjust the width as needed
