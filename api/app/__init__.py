@@ -1,16 +1,20 @@
 from flask import Flask
-from pymongo import MongoClient
+from pymongo.mongo_client import MongoClient
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from mongoengine import connect
 import os
+import dotenv
 
-MONGODB_USERNAME = "pat"
-MONGODB_PASSWORD = "uofthacks"
 
-MONGODB_URI = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@cluster0.9r8z6lf.mongodb.net/uofthacks11?retryWrites=true&w=majority&ssl=true"
+MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
+MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
+MONGODB_DBNAME = os.getenv("MONGODB_DBNAME")
 
-client = MongoClient(MONGODB_URI)
+
+MONGODB_URI = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@cluster0.9r8z6lf.mongodb.net/{MONGODB_DBNAME}?retryWrites=true&w=majority"
+
+client = MongoClient(MONGODB_URI, tlsAllowInvalidCertificates=True)
 db = client["uofthacks11"]
 user = db["user"]
 note = db["note"]

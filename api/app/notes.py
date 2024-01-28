@@ -10,13 +10,6 @@ notes = Blueprint('notes', __name__, url_prefix='/notes')
 def create_note():
     data = request.json
 
-    data = {
-        "creation_time": 123456789,
-        "coordinates": [123.456, 123.456],
-        "title": "title",
-        "body": "body",
-    }
-
     note = Note(
         creation_time=data['creation_time'],
         coordinates=data['coordinates'],
@@ -24,20 +17,19 @@ def create_note():
         body=data['body'],
     )
 
-    note.insert()
+    note.save()
     return "jfdsaoifjsa"
 
 
-# @notes.route('/<note_id>', methods=['GET'])
-# def get_note(note_id):
-#     note = note.find_one()
-#     return jsonify(note.to_dict())
+@notes.route('/<note_id>', methods=['GET'])
+def get_note(note_id):
+    note = note.find_one()
+    return jsonify(note.to_dict())
 
 
 @notes.route('/', methods=['GET'])
 def get_notes():
     notes = note.find()
-
     return jsonify(notes)
 
 
