@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Swipe()),
+                    MaterialPageRoute(builder: (context) => ARView()),
                   );
                 }
               ),

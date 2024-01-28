@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
+import 'package:vector_math/vector_math_64.dart' as vector;
 
 class ARView extends StatefulWidget {
   const ARView({super.key});
@@ -29,6 +30,24 @@ class _ARViewState extends State<ARView> {
   void onARKitViewCreated(ARKitController controller) {
     arkitController = controller;
 
-    // Add ARKit Node or other AR objects here
+    arkitController = controller;
+
+    final material = ARKitMaterial(
+      diffuse: ARKitMaterialProperty.color(Colors.blue),
+      transparency: 0.8,
+    );
+
+    final square = ARKitPlane(
+      materials: [material],
+      width: 0.1, // 10cm square
+      height: 0.1,
+    );
+
+    final node = ARKitNode(
+      geometry: square,
+      position: vector.Vector3(0, 0, -0.5), // 50cm in front of the camera
+    );
+
+    arkitController.add(node);
   }
 }
