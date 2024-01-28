@@ -19,7 +19,7 @@ def create_note():
     )
 
     note.save()
-    return "jfdsaoifjsa"
+    return
 
 
 @notes.route('/<note_id>', methods=['GET'])
@@ -52,5 +52,8 @@ def get_nearby_notes():
     nearby_notes = []
     for note in Note.objects():
         if note.is_near(coordinates):
-            nearby_notes.append(note)
+            nearby_notes.append(note.to_mongo().to_dict())
+    for note_json in nearby_notes:
+        note_json['id'] = str(note_json['_id'])
+        note_json.pop('_id')
     return jsonify(nearby_notes)
