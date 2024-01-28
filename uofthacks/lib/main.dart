@@ -47,7 +47,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
           ),
         ),
 
-        child: ElevatedButton(
+        child: Column(
+          children: [
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -58,8 +60,24 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
                 backgroundColor: Colors.blue, //button colour
                 foregroundColor: Colors.white, //text colour 
               ),
-              child: const Text('Elevated Button')
+              child: const Text('Map')
               ),
+
+              ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Swipe()),
+                );
+              }, 
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue, //button colour
+                foregroundColor: Colors.white, //text colour 
+              ),
+              child: const Text('Add Note')
+              ),
+          ],
+        )
       ),
       ),
        // This trailing comma makes auto-formatting nicer for build methods.
