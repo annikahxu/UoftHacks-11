@@ -67,6 +67,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late ARKitController arkitController;
   ARKitReferenceNode? node;
+  bool _isNodeTapped = false;
 
   @override
   void dispose() {
@@ -77,12 +78,27 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text('ARKit in Flutter')),
-        body: Container(
-          child: ARKitSceneView(
-            showFeaturePoints: true,
-            planeDetection: ARPlaneDetection.horizontal,
-            onARKitViewCreated: onARKitViewCreated,
-          ),
+        // body: Container(
+        //   child: ARKitSceneView(
+        //     showFeaturePoints: true,
+        //     enableTapRecognizer: true,
+        //     planeDetection: ARPlaneDetection.horizontal,
+        //     onARKitViewCreated: onARKitViewCreated,
+        //   ),
+        // ),
+        body: Stack(
+          children: [
+            ARKitSceneView(
+              //showFeaturePoints: true,
+              enableTapRecognizer: true,
+              planeDetection: ARPlaneDetection.horizontal,
+              onARKitViewCreated: onARKitViewCreated,
+            ),
+            if (_isNodeTapped)
+              Center(
+                  child: Text(
+                      'Object Tapped!')), // UI element to display when a node is tapped
+          ],
         ),
       );
 
@@ -96,8 +112,25 @@ class _MyAppState extends State<MyApp> {
     //   scale: vector.Vector3.all(0.3),
     // );
     this.arkitController.add(node);
+
+    this.arkitController.onNodeTap = (nodes) => _onNodeTap(nodes);
+  }
+
+  void _onNodeTap(List<String> nodes) {
+    // Handle the tap event. 'nodes' contains the names of tapped nodes.
+    print('Tapped on ${nodes.first}');
+    if (_isNodeTapped) {
+      setState(() {
+        _isNodeTapped = false; // Update state to show UI element
+      });
+    } else {
+      setState(() {
+        _isNodeTapped = true; // Update state to show UI element
+      });
+    }
   }
 }
+
 
 //   void onARKitViewCreated(ARKitController arkitController) {
 //     this.arkitController = arkitController;
