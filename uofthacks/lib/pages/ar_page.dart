@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
-import 'package:vector_math/vector_math_64.dart' as vector;
+import 'package:vector_math/vector_math_64.dart';
 
 class ARView extends StatefulWidget {
   const ARView({super.key});
@@ -27,27 +27,15 @@ class _ARViewState extends State<ARView> {
     );
   }
 
-  void onARKitViewCreated(ARKitController controller) {
-    arkitController = controller;
-
-    arkitController = controller;
-
-    final material = ARKitMaterial(
-      diffuse: ARKitMaterialProperty.color(Colors.blue),
-      transparency: 0.8,
-    );
-
-    final square = ARKitPlane(
-      materials: [material],
-      width: 0.1, // 10cm square
-      height: 0.1,
-    );
-
+  void onARKitViewCreated(ARKitController arkitController) {
+    this.arkitController = arkitController;
     final node = ARKitNode(
-      geometry: square,
-      position: vector.Vector3(0, 0, -0.5), // 50cm in front of the camera
-    );
-
-    arkitController.add(node);
+        geometry: ARKitBox(width: 0.6, height: 0.4, length: 0.1),
+        position: Vector3(0, 0, -0.5));
+    // final node = ARKitReferenceNode(
+    //   url: 'models.scnassets/Envelope.dae',
+    //   scale: vector.Vector3.all(0.3),
+    // );
+    this.arkitController.add(node);
   }
 }

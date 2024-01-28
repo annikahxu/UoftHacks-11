@@ -17,8 +17,8 @@ class MessagesNearModel {
 
   void fetchData(List<double> position) async {
   try {
-      var apiService = MessagesNearApiService("baseUrl"); ////// do something about baseURL
-      var response = await apiService.getRequest('/locations', position); // Adjust the endpoint
+      var apiService = MessagesNearApiService("http://localhost:5000"); ////// do something about baseURL
+      var response = await apiService.getRequest('/node/nearby', position); // Adjust the endpoint
       var jsonData = json.decode(response.body) as List;
       var locations = jsonData.map((item) => MessagesNearModel.fromJson(item)).toList();
 
