@@ -33,6 +33,6 @@ class MessagesNearModel {
 }
 
 void main() {
-  var model = MessagesNearModel(title: 'Example', location: [0.0, 0.0]);
-  model.fetchData([1.0, 2.0]);
+  var model = MessagesNearModel(title: 'Example', location: [43.6690119,-79.391594]);
+  model.fetchData([43.6690119,-79.391594]);
 }

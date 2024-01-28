@@ -20,7 +20,7 @@ def create_note():
     )
 
     note.save()
-    return
+    return 200
 
 
 @notes.route('/<note_id>', methods=['GET'])
