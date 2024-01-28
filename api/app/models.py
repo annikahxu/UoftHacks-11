@@ -1,4 +1,4 @@
-from mongoengine import *
+from mongoengine import Document, ObjectIdField, StringField, ListField, IntField, FloatField
 from flask import jsonify, request
 import math
 import datetime

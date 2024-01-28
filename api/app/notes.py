@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from bson.objectid import ObjectId
+from bson import ObjectId
 import time
 
 from .models import User, Note
@@ -7,8 +7,7 @@ from . import note
 
 notes = Blueprint('notes', __name__, url_prefix='/notes')
 
-
-@notes.route('/', methods=['POST'])
+@notes.route('/', methods=['GET', 'POST'])
 def create_note():
     data = request.json
 

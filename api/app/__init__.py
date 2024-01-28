@@ -5,6 +5,8 @@ from flask_cors import CORS
 from mongoengine import connect
 import os
 from dotenv import load_dotenv
+import certifi
+import ssl
 
 load_dotenv()
 
@@ -13,9 +15,9 @@ MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
 MONGODB_DBNAME = os.getenv("MONGODB_DBNAME")
 
 
-MONGODB_URI = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@cluster0.9r8z6lf.mongodb.net/{MONGODB_DBNAME}?retryWrites=true&w=majority"
+MONGODB_URI = f"mongodb+srv://{MONGODB_USERNAME}:{MONGODB_PASSWORD}@cluster0.9r8z6lf.mongodb.net/{MONGODB_DBNAME}?ssl=true&tlsCAFile={certifi.where()}"
 
-client = MongoClient(MONGODB_URI, tlsAllowInvalidCertificates=True)
+client = MongoClient(MONGODB_URI)
 db = client["uofthacks11"]
 user = db["user"]
 note = db["note"]
