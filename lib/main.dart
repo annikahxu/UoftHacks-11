@@ -100,11 +100,11 @@ class _MyAppState extends State<MyApp> {
                 child: Container(
                   padding: EdgeInsets.all(20), // Padding around the text
                   color: Color.fromRGBO(
-                      23, 195, 178, 1), // Background color for highlight
+                      7, 57, 60, 1), // Background color for highlight
                   child: Text(
                     nodetext,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color.fromRGBO(240, 237, 238, 1),
                       fontSize: 20,
                       //fontWeight: FontWeight.bold,
                     ),
@@ -120,13 +120,20 @@ class _MyAppState extends State<MyApp> {
 
   void onARKitViewCreated(ARKitController arkitController) {
     this.arkitController = arkitController;
+    final material = ARKitMaterial(
+      diffuse: ARKitMaterialProperty.color(Color.fromRGBO(106, 147, 195, 1)),
+      // diffuse: ARKitMaterialProperty.image(
+      //     '.'), // Specify the path to your texture image
+    );
+
     final node = ARKitNode(
-        geometry: ARKitBox(width: 0.6, height: 0.4, length: 0.1),
+        geometry: ARKitBox(
+            materials: [material], width: 0.6, height: 0.4, length: 0.1),
         position: Vector3(0, 0, -0.5));
     // final node = ARKitReferenceNode(
-    //   url: 'models.scnassets/Envelope.dae',
-    //   scale: vector.Vector3.all(0.3),
-    // );
+    //     url: 'models.scnassets/Envelope.dae',
+    //     scale: Vector3.all(0.3),
+    //     position: Vector3(0, 0, -0.5));
     this.arkitController.add(node);
 
     this.arkitController.onNodeTap = (nodes) => _onNodeTap(nodes);
