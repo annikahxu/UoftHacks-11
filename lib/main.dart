@@ -55,7 +55,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
-import 'package:vector_math/vector_math_64.dart'; // as vector;
+import 'package:vector_math/vector_math_64.dart' hide Colors; // as vector;
 
 void main() => runApp(MaterialApp(home: MyApp()));
 
@@ -68,6 +68,7 @@ class _MyAppState extends State<MyApp> {
   late ARKitController arkitController;
   ARKitReferenceNode? node;
   bool _isNodeTapped = false;
+  var nodetext = "Test text";
 
   @override
   void dispose() {
@@ -77,7 +78,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('ARKit in Flutter')),
+        //appBar: AppBar(title: const Text('ARKit in Flutter')),
         // body: Container(
         //   child: ARKitSceneView(
         //     showFeaturePoints: true,
@@ -96,8 +97,23 @@ class _MyAppState extends State<MyApp> {
             ),
             if (_isNodeTapped)
               Center(
+                child: Container(
+                  padding: EdgeInsets.all(20), // Padding around the text
+                  color: Color.fromRGBO(
+                      23, 195, 178, 1), // Background color for highlight
                   child: Text(
-                      'Object Tapped!')), // UI element to display when a node is tapped
+                    nodetext,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      //fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              )
+
+            // child: Text(
+            //     'Object Tapped!')), // UI element to display when a node is tapped
           ],
         ),
       );
