@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uofthacks/pages/map_page.dart';
+import 'package:uofthacks/pages/ar_page.dart';
 import 'package:uofthacks/pages/swipe.dart';
 
 void main() {
@@ -67,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Swipe()),
+                  MaterialPageRoute(builder: (context) => ARView()),
                 );
               }, 
               style: ElevatedButton.styleFrom(
