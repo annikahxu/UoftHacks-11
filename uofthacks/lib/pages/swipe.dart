@@ -1,12 +1,17 @@
-// lib/pages/second_page.dart
-
 import 'package:flutter/material.dart';
 import 'package:uofthacks/main.dart';
+import 'package:arkit_plugin/arkit_plugin.dart';
 
-class Swipe extends StatelessWidget {
+class Swipe extends StatefulWidget {
+  const Swipe({super.key});
+
+  @override
+  _SwipeState createState() => _SwipeState();
+}
+
+class _SwipeState extends State<Swipe>  {
+  late ARKitController arkitController;
   final FocusNode inputNode = FocusNode();
-
-  Swipe({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -89,5 +94,17 @@ class Swipe extends StatelessWidget {
           )
           ),
         );
+  }
+
+  @override
+  void dispose() {
+    arkitController.dispose();
+    super.dispose();
+  }
+
+  void onARKitViewCreated(ARKitController controller) {
+    arkitController = controller;
+
+    // Add ARKit Node or other AR objects here
   }
 }
