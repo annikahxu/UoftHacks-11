@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from bson.objectid import ObjectId
 
 from .models import User, Note
 from . import note
@@ -23,14 +24,19 @@ def create_note():
 
 @notes.route('/<note_id>', methods=['GET'])
 def get_note(note_id):
-    note = note.find_one()
+    note = note.find_one({'_id': ObjectId(note_id)})
+    note.pop('_id')
     return jsonify(note.to_dict())
 
 
 @notes.route('/', methods=['GET'])
 def get_notes():
-    notes = note.find()
-    return jsonify(notes)
+    notes = Note.objects()
+    notes_json = [note.to_mongo().to_dict() for note in notes]
+    for note_json in notes_json:
+        note_json['id'] = str(note_json['_id'])
+        note_json.pop('_id')
+    return (jsonify(notes_json))
 
 
 @notes.route('/<note_id>', methods=['DELETE'])

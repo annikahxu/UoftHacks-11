@@ -4,8 +4,9 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS
 from mongoengine import connect
 import os
-import dotenv
+from dotenv import load_dotenv
 
+load_dotenv()
 
 MONGODB_USERNAME = os.getenv("MONGODB_USERNAME")
 MONGODB_PASSWORD = os.getenv("MONGODB_PASSWORD")
