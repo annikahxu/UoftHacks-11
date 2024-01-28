@@ -1,6 +1,61 @@
+// import 'package:arkit_plugin/arkit_plugin.dart';
+// import 'package:flutter/material.dart';
+// import 'package:vector_math/vector_math_64.dart' as vector;
+
+// class CustomObjectPage extends StatefulWidget {
+//   @override
+//   _CustomObjectPageState createState() => _CustomObjectPageState();
+// }
+
+// class _CustomObjectPageState extends State<CustomObjectPage> {
+//   late ARKitController arkitController;
+//   ARKitReferenceNode? node;
+
+//   @override
+//   void dispose() {
+//     arkitController.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) => Scaffold(
+//         appBar: AppBar(title: const Text('Custom object on plane Sample')),
+//         body: Container(
+//           child: ARKitSceneView(
+//             showFeaturePoints: true,
+//             planeDetection: ARPlaneDetection.horizontal,
+//             onARKitViewCreated: onARKitViewCreated,
+//           ),
+//         ),
+//       );
+
+//   void onARKitViewCreated(ARKitController arkitController) {
+//     this.arkitController = arkitController;
+//     arkitController.addCoachingOverlay(CoachingOverlayGoal.horizontalPlane);
+//     arkitController.onAddNodeForAnchor = _handleAddAnchor;
+//   }
+
+//   void _handleAddAnchor(ARKitAnchor anchor) {
+//     if (anchor is ARKitPlaneAnchor) {
+//       _addPlane(arkitController, anchor);
+//     }
+//   }
+
+//   void _addPlane(ARKitController controller, ARKitPlaneAnchor anchor) {
+//     if (node != null) {
+//       controller.remove(node!.name);
+//     }
+//     node = ARKitReferenceNode(
+//       url: 'models.scnassets/Envelope.dae',
+//       scale: vector.Vector3.all(0.3),
+//     );
+//     controller.add(node!, parentNodeName: anchor.nodeName);
+//   }
+// }
+
 import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
-import 'package:vector_math/vector_math_64.dart' as vector;
+import 'package:vector_math/vector_math_64.dart'; // as vector;
 
 void main() => runApp(MaterialApp(home: MyApp()));
 
@@ -21,46 +76,52 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: const Text('ARKit in Flutter')),
-      body: Container(
+        appBar: AppBar(title: const Text('ARKit in Flutter')),
+        body: Container(
           child: ARKitSceneView(
             showFeaturePoints: true,
             planeDetection: ARPlaneDetection.horizontal,
             onARKitViewCreated: onARKitViewCreated,
           ),
         ),
-  );
-
-  // void onARKitViewCreated(ARKitController arkitController) {
-  //   this.arkitController = arkitController;
-  //   final node = ARKitNode(
-  //       geometry: ARKitSphere(radius: 0.1), position: Vector3(0, 0, -0.5));
-  //   this.arkitController.add(node);
-  // }
+      );
 
   void onARKitViewCreated(ARKitController arkitController) {
     this.arkitController = arkitController;
-    arkitController.addCoachingOverlay(CoachingOverlayGoal.horizontalPlane);
-    arkitController.onAddNodeForAnchor = _handleAddAnchor;
-  }
-
-  void _handleAddAnchor(ARKitAnchor anchor) {
-    if (anchor is ARKitPlaneAnchor) {
-      _addPlane(arkitController, anchor);
-    }
-  }
-
-  void _addPlane(ARKitController controller, ARKitPlaneAnchor anchor) {
-    if (node != null) {
-      controller.remove(node!.name);
-    }
-    node = ARKitReferenceNode(
-      url: './ios/Runner/models.scnassets/Envelope.dae',
-      scale: vector.Vector3.all(0.3),
-    );
-    controller.add(node!, parentNodeName: anchor.nodeName);
+    final node = ARKitNode(
+        geometry: ARKitBox(width: 0.6, height: 0.4, length: 0.1),
+        position: Vector3(0, 0, -0.5));
+    // final node = ARKitReferenceNode(
+    //   url: 'models.scnassets/Envelope.dae',
+    //   scale: vector.Vector3.all(0.3),
+    // );
+    this.arkitController.add(node);
   }
 }
+
+//   void onARKitViewCreated(ARKitController arkitController) {
+//     this.arkitController = arkitController;
+//     arkitController.addCoachingOverlay(CoachingOverlayGoal.horizontalPlane);
+//     arkitController.onAddNodeForAnchor = _handleAddAnchor;
+//   }
+
+//   void _handleAddAnchor(ARKitAnchor anchor) {
+//     if (anchor is ARKitPlaneAnchor) {
+//       _addPlane(arkitController, anchor);
+//     }
+//   }
+
+//   void _addPlane(ARKitController controller, ARKitPlaneAnchor anchor) {
+//     if (node != null) {
+//       controller.remove(node!.name);
+//     }
+//     node = ARKitReferenceNode(
+//       url: './ios/Runner/models.scnassets/Envelope.dae',
+//       scale: vector.Vector3.all(0.3),
+//     );
+//     controller.add(node!, parentNodeName: anchor.nodeName);
+//   }
+// }
 
 
 // void main() {
