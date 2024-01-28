@@ -51,23 +51,37 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ARView()),
                   );
-                }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0, left: 20.0),
+                  child: Image.asset(
+                  'assets/leftarrow.jpeg', // Replace with the path to your image asset
+                  width: 100, // Adjust the width as needed
+                  height: 100, // Adjust the height as needed
+                ),
+                ) 
               ),
-              IconButton(
-                icon: const Icon(Icons.arrow_forward),
-                onPressed: () {
+              InkWell(
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MapPage()),
                   );
-                }
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 675.0, right: 40.0),
+                  child: Image.asset(
+                  'assets/rightarrow.jpeg', // Replace with the path to your image asset
+                  width: 150, // Adjust the width as needed
+                  height: 150, // Adjust the height as needed
+                ),
+                ) 
               ),
           ],
         )
