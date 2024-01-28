@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
-import 'package:vector_math/vector_math_64.dart';
+import 'package:vector_math/vector_math_64.dart' as vector;
 
 void main() => runApp(MaterialApp(home: MyApp()));
 
@@ -11,6 +11,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late ARKitController arkitController;
+  ARKitReferenceNode? node;
 
   @override
   void dispose() {
@@ -21,15 +22,46 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: const Text('ARKit in Flutter')),
-      body: ARKitSceneView(onARKitViewCreated: onARKitViewCreated));
+      body: Container(
+          child: ARKitSceneView(
+            showFeaturePoints: true,
+            planeDetection: ARPlaneDetection.horizontal,
+            onARKitViewCreated: onARKitViewCreated,
+          ),
+        ),
+  );
+
+  // void onARKitViewCreated(ARKitController arkitController) {
+  //   this.arkitController = arkitController;
+  //   final node = ARKitNode(
+  //       geometry: ARKitSphere(radius: 0.1), position: Vector3(0, 0, -0.5));
+  //   this.arkitController.add(node);
+  // }
 
   void onARKitViewCreated(ARKitController arkitController) {
     this.arkitController = arkitController;
-    final node = ARKitNode(
-        geometry: ARKitSphere(radius: 0.1), position: Vector3(0, 0, -0.5));
-    this.arkitController.add(node);
+    arkitController.addCoachingOverlay(CoachingOverlayGoal.horizontalPlane);
+    arkitController.onAddNodeForAnchor = _handleAddAnchor;
+  }
+
+  void _handleAddAnchor(ARKitAnchor anchor) {
+    if (anchor is ARKitPlaneAnchor) {
+      _addPlane(arkitController, anchor);
+    }
+  }
+
+  void _addPlane(ARKitController controller, ARKitPlaneAnchor anchor) {
+    if (node != null) {
+      controller.remove(node!.name);
+    }
+    node = ARKitReferenceNode(
+      url: './ios/Runner/models.scnassets/Envelope.dae',
+      scale: vector.Vector3.all(0.3),
+    );
+    controller.add(node!, parentNodeName: anchor.nodeName);
   }
 }
+
 
 // void main() {
 //   runApp(const MyApp());
