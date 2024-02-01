@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uofthacks/pages/map_page.dart';
+import 'package:uofthacks/pages/swipe.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,8 +25,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  final PageController _pageController = PageController(initialPage: 1);
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +37,17 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
+        child: Container(
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(32),
+        decoration: const BoxDecoration(
+          image:DecorationImage(
+            image: AssetImage('assets/landingpage.jpeg'),
+            fit: BoxFit.cover
+          ),
+        ),
+
+        child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -53,30 +60,14 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: const Text('Elevated Button')
               ),
-            
-          ],
-        ),
+      ),
       ),
        // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
 
-class LandingPage extends StatelessWidget {
-  const LandingPage({Key? key}) : super(key : key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: const Center(
-        child: Text('Home Page'),
-      ),
-    );
-  }
-}
-
-class Swipe extends StatelessWidget {
+/* class Swipe extends StatelessWidget {
   const Swipe({Key? key}) : super(key: key);
 
   @override
@@ -88,7 +79,7 @@ class Swipe extends StatelessWidget {
       ),
     );
   }
-}
+} */
 
 class LeftSwipe extends StatelessWidget {
   const LeftSwipe({Key? key}) : super(key: key);
