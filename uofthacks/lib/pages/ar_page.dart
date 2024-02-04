@@ -141,7 +141,7 @@ class _ARViewState extends State<ARView> {
     //   scale: vector.Vector3.all(0.3),
     // );
     this.arkitController.add(node);
-    this.arkitController.onNodeTap = (nodes) => _onNodeTap(nodes);
+    //this.arkitController.onNodeTap = (nodes) => _onNodeTap(nodes);
   }
 
   Widget buildMessageWidget(MessageObject obj) {
